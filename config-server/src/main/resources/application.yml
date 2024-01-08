@@ -3,11 +3,17 @@ server:
 spring:
   application:
     name: config-server
-  profiles:
-    active:
-      - native
+#  profiles:
+#    active:
+#      - native
   cloud:
     config:
       server:
-        git: 
+        git:
+          uri: https://github.com/joaoeduardoam/udemy-microservice
+          default-label: main
+          search-paths:
+          - 'core-config-server/greeting-service*'
+
+
 
