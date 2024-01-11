@@ -1,5 +1,18 @@
 server:
   port: 8000
+  error:
+    include-stacktrace: never
 spring:
   application:
     name: cambio-service
+  datasource:
+    url: jdbc:mysql://localhost/cambio_service
+    username: root
+    password: mysql
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+
