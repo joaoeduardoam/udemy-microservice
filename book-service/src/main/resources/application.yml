@@ -1,0 +1,20 @@
+server:
+  port: 8100
+  error:
+    include-stacktrace: never
+spring:
+  application:
+    name: book-service
+  datasource:
+    url: jdbc:mysql://localhost/book_service
+    username: root
+    password: mysql
+  jackson:
+    default-property-inclusion: NON_NULL
+    serialization:
+      fail-on-empty-beans: false
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

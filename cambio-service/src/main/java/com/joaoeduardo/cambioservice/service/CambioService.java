@@ -1,6 +1,7 @@
 package com.joaoeduardo.cambioservice.service;
 
-import com.joaoeduardo.cambioservice.model.Cambio;
+import com.joaoeduardo.cambioservice.exceptions.UnsupportedCurrencyException;
+import com.joaoeduardo.cambioservice.model.ConvertedCambioDTO;
 import com.joaoeduardo.cambioservice.repository.CambioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -18,17 +19,16 @@ public class CambioService {
     public CambioRepository cambioRepository;
 
 
-    public Cambio getCambio(BigDecimal amount, String from, String to) {
+    public ConvertedCambioDTO getCambio(Double amount, String from, String to) {
 
 
         var cambio = cambioRepository.findByFromAndTo(from, to);
-        if (cambio == null) throw new RuntimeException("Unsupported Currency!");
-        cambio.setConvertedValue(cambio.getConversionFactor().multiply(amount));
+        if (cambio == null) throw new UnsupportedCurrencyException("Unsupported Currency!");
 
+        var convertedValue = cambio.getConversionFactor()*amount;
         var port = environment.getProperty("local.server.port");
-        cambio.setEnviroment(port);
 
-        return cambio;
+        return new ConvertedCambioDTO(from, to, cambio.getConversionFactor(), convertedValue, port);
 
     }
 }

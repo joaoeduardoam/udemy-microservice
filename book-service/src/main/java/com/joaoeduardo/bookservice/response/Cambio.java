@@ -1,4 +1,4 @@
-package com.joaoeduardo.cambioservice.model;
+package com.joaoeduardo.bookservice.response;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,19 +11,12 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
-@Table
 public class Cambio implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "from_currency")
     private String from;
-    @Column(name = "to_currency")
     private String to;
-    private Double conversionFactor;
+    private BigDecimal conversionFactor;
 
 
 

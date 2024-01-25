@@ -1,4 +1,4 @@
-package com.joaoeduardo.cambioservice.model;
+package com.joaoeduardo.bookservice.model;
 
 import java.math.BigDecimal;
 

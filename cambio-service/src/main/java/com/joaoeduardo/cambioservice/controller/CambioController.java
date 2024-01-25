@@ -1,9 +1,10 @@
 package com.joaoeduardo.cambioservice.controller;
 
-import com.joaoeduardo.cambioservice.model.Cambio;
 import com.joaoeduardo.cambioservice.model.ConvertCambioDTO;
+import com.joaoeduardo.cambioservice.model.ConvertedCambioDTO;
 import com.joaoeduardo.cambioservice.service.CambioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -15,17 +16,20 @@ public class CambioController {
 
     @Autowired
     private CambioService cambioService;
-    @GetMapping//(value = "/{amount}/{from}/{to}")
-    public Cambio convertCambio(@RequestBody ConvertCambioDTO dto){
+    @PutMapping
+    public ConvertedCambioDTO convertCambio(@RequestBody ConvertCambioDTO dto){
 
+        var convertedCambioDTO = cambioService.getCambio(dto.amount(), dto.from(), dto.to());
+        System.out.println("EEEEEEEEEEEEPPPPPPPPPPPAAAAAAAAA"+convertedCambioDTO);
+        return convertedCambioDTO;
 
+    }
 
-        var cambio = cambioService.getCambio(dto.amount(), dto.from(), dto.to());
-
-
-        return cambio;
-
-
+    @GetMapping
+    public void workaround(){
+    }
+    @PostMapping
+    public void workaround1(){
     }
 
 }
