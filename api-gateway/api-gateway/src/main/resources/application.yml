@@ -1,0 +1,28 @@
+server:
+  port: 8765
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+spring:
+  application:
+    name: api-gateway
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#          lowerCaseServiceId: true
+#      routes:
+#        - id: hello-world
+#          predicates:
+#            - Path=/get
+#          uri: https://httpbin.org/
+#        - id: cambio-service
+#          predicates:
+#            - Path=/cambio-service/**
+#          uri: lb://cambio-service
+#        - id: book-service
+#          predicates:
+#            - Path=/book-service/**
+#          uri: lb://book-service

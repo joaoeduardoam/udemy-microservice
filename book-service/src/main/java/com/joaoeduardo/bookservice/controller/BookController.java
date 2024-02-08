@@ -34,4 +34,8 @@ public class BookController {
     public void workaround(){
     }
 
+    @PostMapping
+    public void workaround1(){
+    }
+
 }

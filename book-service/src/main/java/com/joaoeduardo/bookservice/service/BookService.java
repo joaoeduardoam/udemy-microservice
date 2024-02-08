@@ -43,45 +43,20 @@ public class BookService {
 
         System.out.println("aaaaaaaaaaaaaaa"+cambioDTO);
 
-        var cambio = cambioServiceClient.convertCambio(cambioDTO);
+        var convertedCambioDTO = cambioServiceClient.convertCambio(cambioDTO);
 
-//        HashMap<String, String> params = new HashMap<>();
-//        params.put("amount","10");
-//        params.put("from","USD");
-//        params.put("to",currency);
+        System.out.println("aaaaaaaaaaaaaaa"+convertedCambioDTO);
 
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-//
-//        MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
-//        map.add("amount","10");
-//        map.add("from","USD");
-//        map.add("to",currency);
+        book.setPrice(convertedCambioDTO.convertedValue());
 
-//        HttpEntity<ConvertCambioDTO> request = new HttpEntity<ConvertCambioDTO>(
-//                new ConvertCambioDTO(10d, "USD",currency));
-//
-//        var response = new RestTemplate().getForEntity("http://localhost:8000/cambio-service", ConvertedCambioDTO.class, request);
-//
-//        var cambio = response.getBody();
+        var bookServicePort = "Book Service port: "+environment.getProperty("local.server.port");
+        var cambioServicePort = "Cambio Service port: "+convertedCambioDTO.enviroment();
 
-        System.out.println("aaaaaaaaaaaaaaa"+cambio);
-
-        book.setPrice(cambio.convertedValue());
-
-        var port = environment.getProperty("local.server.port");
-        var detailsBookDTO = new DetailsBookDTO(book, currency, port + " FEIGN");
+        var detailsBookDTO = new DetailsBookDTO(book, currency, bookServicePort + cambioServicePort);
         return detailsBookDTO;
 
     }
 
-    public Double getPricebyId(Long id) {
-
-        var book = bookRepository.getReferenceById(id);
-
-        return book.getPrice();
-
-    }
 
 
 
