@@ -8,6 +8,22 @@ eureka:
       defaultZone: http://localhost:8761/eureka
   instance:
     prefer-ip-address: true
+resilience4j:
+  bulkhead:
+    instances:
+      foo-bar:
+        maxConcurrentCalls: 2
+  ratelimiter:
+    instances:
+      foo-bar:
+        limitForPeriod: 2
+        limitRefreshPeriod: 10s
+  retry:
+    instances:
+      foo-bar:
+        maxAttempts: 5
+        waitDuration: 1s
+        enableExponentialBackoff: true
 spring:
   application:
     name: book-service
