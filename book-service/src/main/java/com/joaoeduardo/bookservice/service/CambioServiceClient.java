@@ -11,10 +11,5 @@ public interface CambioServiceClient {
     @PutMapping(value = "/cambio-service")
     ConvertedCambioDTO convertCambio(@RequestBody ConvertCambioDTO dto);
 
-    @PostMapping
-    void workaround();
-
-    @GetMapping
-    void workaround1();
 
 }

@@ -30,12 +30,12 @@ public class BookController {
 
     }
 
-    @GetMapping
-    public void workaround(){
-    }
+//    @GetMapping
+//    public void workaround(){
+//    }
 
-    @PostMapping
-    public void workaround1(){
-    }
+//    @PostMapping
+//    public void workaround1(){
+//    }
 
 }

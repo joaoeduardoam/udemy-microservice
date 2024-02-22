@@ -8,6 +8,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Service
 public class CambioService {
@@ -26,9 +27,10 @@ public class CambioService {
         if (cambio == null) throw new UnsupportedCurrencyException("Unsupported Currency!");
 
         var convertedValue = cambio.getConversionFactor()*amount;
+        BigDecimal convertedValueScaled = BigDecimal.valueOf(convertedValue).setScale(2, RoundingMode.CEILING);
         var port = environment.getProperty("local.server.port");
 
-        return new ConvertedCambioDTO(from, to, cambio.getConversionFactor(), convertedValue, port);
+        return new ConvertedCambioDTO(from, to, cambio.getConversionFactor(), convertedValueScaled, port);
 
     }
 }

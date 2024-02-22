@@ -40,3 +40,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+springdoc:
+  show-actuator: true
+  api-docs:
+    path: book-service/v3/api-docs

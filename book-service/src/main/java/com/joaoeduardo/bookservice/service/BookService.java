@@ -41,11 +41,9 @@ public class BookService {
 
         ConvertCambioDTO cambioDTO = new ConvertCambioDTO(book.getPrice(), "USD", currency);
 
-        System.out.println("aaaaaaaaaaaaaaa"+cambioDTO);
 
         var convertedCambioDTO = cambioServiceClient.convertCambio(cambioDTO);
 
-        System.out.println("aaaaaaaaaaaaaaa"+convertedCambioDTO);
 
         book.setPrice(convertedCambioDTO.convertedValue());
 

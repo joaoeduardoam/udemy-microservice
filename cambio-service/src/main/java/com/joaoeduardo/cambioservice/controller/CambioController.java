@@ -20,16 +20,8 @@ public class CambioController {
     public ConvertedCambioDTO convertCambio(@RequestBody ConvertCambioDTO dto){
 
         var convertedCambioDTO = cambioService.getCambio(dto.amount(), dto.from(), dto.to());
-        System.out.println("EEEEEEEEEEEEPPPPPPPPPPPAAAAAAAAA"+convertedCambioDTO);
         return convertedCambioDTO;
 
-    }
-
-    @GetMapping
-    public void workaround(){
-    }
-    @PostMapping
-    public void workaround1(){
     }
 
 }

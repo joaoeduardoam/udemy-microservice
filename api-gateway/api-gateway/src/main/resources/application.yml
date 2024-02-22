@@ -4,25 +4,35 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
 spring:
   application:
     name: api-gateway
-#  cloud:
-#    gateway:
-#      discovery:
-#        locator:
-#          enabled: true
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
 #          lowerCaseServiceId: true
-#      routes:
+      routes:
 #        - id: hello-world
 #          predicates:
 #            - Path=/get
 #          uri: https://httpbin.org/
-#        - id: cambio-service
-#          predicates:
-#            - Path=/cambio-service/**
-#          uri: lb://cambio-service
-#        - id: book-service
-#          predicates:
-#            - Path=/book-service/**
-#          uri: lb://book-service
+        - id: cambio-service
+          predicates:
+          - Path=/cambio-service/** #, /v3/api-docs/cambio-service
+          uri: lb://cambio-service
+
+        - id: book-service
+          predicates:
+          - Path=/book-service/** #, /v3/api-docs/book-service
+          uri: lb://book-service
+
+        - id: openapi
+          uri: lb://api-gateway
+          predicates:
+          - Path=/v3/api-docs/**
+          filters:
+          - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
